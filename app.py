@@ -10,8 +10,7 @@ import matplotlib.pyplot as plt
 st.title("Linear Regression Web App")
 
 # Upload the dataset
-data = pd.read_csv("C:/Users/lalan/OneDrive/Desktop/Case Study Practical Exam/salary_data.csv")
-data.head()
+data = pd.read_csv("salary_data.csv")
 # Choose the target and feature columns
 columns = data.columns.tolist()
 target_column = st.selectbox("Salary", columns)
