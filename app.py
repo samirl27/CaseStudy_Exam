@@ -10,16 +10,22 @@ import matplotlib.pyplot as plt
 # Title of the web app
 st.title("Diabetes Linear Regression Web App")
 
-# Upload the dataset
-data = pd.read_csv("diabetes.csv")
+# Load the diabetes dataset
+diabetes_data = load_diabetes(as_frame=True)
+df = diabetes_data.frame
+
+# Display the dataset
+st.write("Diabetes Dataset:")
+st.write(df)
+
 # Choose the target and feature columns
-columns = data.columns.tolist()
-target_column = st.selectbox("Outcome", columns)
+columns = df.columns.tolist()
+target_column = st.selectbox("Select the target column", columns, index=columns.index('progression'))
 
-# Ensure that the default values are included in the options list
-# Here, we are using the same options as before, but we need to ensure the default values are valid
-options = ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"]
+# Feature column selection
+feature_columns = st.multiselect("Select the feature columns", columns, default=columns[:-1])
 
+# Check if any feature columns are selected
 if feature_columns:
     # Splitting the data
     X = df[feature_columns]
@@ -67,3 +73,10 @@ if feature_columns:
 else:
     st.warning("Please select at least one feature column.")
 
+# Instructions for the user
+st.write("""
+### Instructions:
+1. Select the target column (usually 'progression').
+2. Select one or more feature columns from the diabetes dataset.
+3. The app will perform linear regression and display the R² score, model coefficients, and plots of actual vs predicted values.
+""")
