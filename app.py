@@ -14,9 +14,6 @@ st.title("Diabetes Linear Regression Web App")
 diabetes_data = load_diabetes(as_frame=True)
 df = diabetes_data.frame
 
-# Display the dataset
-st.write("Diabetes Dataset:")
-st.write(df)
 
 # Choose the target and feature columns
 columns = df.columns.tolist()
