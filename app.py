@@ -10,11 +10,20 @@ import matplotlib.pyplot as plt
 st.title("Linear Regression Web App")
 
 # Upload the dataset
-data = pd.read_csv("salary_data.csv")
+data = pd.read_csv("diabetes.csv")
 # Choose the target and feature columns
 columns = data.columns.tolist()
-target_column = st.selectbox("Salary", columns)
-feature_columns = st.multiselect("YearsExperience", columns, default=columns[:-1])
+target_column = st.selectbox("Outcome", columns)
+
+# Ensure that the default values are included in the options list
+# Here, we are using the same options as before, but we need to ensure the default values are valid
+options = ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"]
+
+# Corrected the multiselect function to pass the options as a list
+# Make sure the default values are valid options
+feature_columns = st.multiselect("Select Features", 
+                                   options=options, 
+                                   default=[col for col in options if col in columns[:-1]])  # Only include valid defaults
 # Splitting the data
 X = data[feature_columns]
 y = data[target_column]
