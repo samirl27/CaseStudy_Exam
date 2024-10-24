@@ -19,12 +19,17 @@ st.write("Diabetes Dataset:")
 st.write(df)
 
 # Choose the target and feature columns
-columns = data.columns.tolist()
+columns = df.columns.tolist()
 target_column = st.selectbox("Outcome", columns)
 
 # Ensure that the default values are included in the options list
 # Here, we are using the same options as before, but we need to ensure the default values are valid
 options = ["Pregnancies", "Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"]
+# Corrected the multiselect function to pass the options as a list
+# Make sure the default values are valid options
+feature_columns = st.multiselect("Select Features", 
+                                   options=options, 
+                                   default=[col for col in options if col in columns[:-1]])  # Only include valid defaults
 
 
 # Check if any feature columns are selected
