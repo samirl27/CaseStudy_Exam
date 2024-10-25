@@ -27,7 +27,7 @@ model.fit(X_train, y_train)
 st.title("Salary Prediction Based on Years of Experience")
 
 # User input for years of experience
-years_of_experience = st.slider('Years of Experience', 0, 40, 1, step=0.1)
+years_of_experience = st.slider('Years of Experience', 0, 40, 1, step=1)
 
 # Predict salary based on input
 predicted_salary = model.predict(np.array([[years_of_experience]]))[0]
